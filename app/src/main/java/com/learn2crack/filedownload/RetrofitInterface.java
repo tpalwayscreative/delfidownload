@@ -7,7 +7,7 @@ import retrofit2.http.Streaming;
 
 public interface RetrofitInterface {
 
-    @GET("itc_android.rar")
+    @GET("AirDroid_Desktop_Client_3.5.4.0.exe")
     @Streaming
     Call<ResponseBody> downloadFile();
 }

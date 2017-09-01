@@ -7,8 +7,10 @@ import android.content.Intent;
 import android.os.Environment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.learn2crack.filedownload.models.Download;
 
 import java.io.BufferedInputStream;
@@ -26,27 +28,26 @@ import retrofit2.Retrofit;
 
 public class DownloadService extends IntentService {
 
+
     public DownloadService() {
         super("Download Service");
     }
-
     private NotificationCompat.Builder notificationBuilder;
     private NotificationManager notificationManager;
     private int totalFileSize;
 
+    public static final String TAG = DownloadService.class.getSimpleName();
 
     @Override
     protected void onHandleIntent(Intent intent) {
 
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
         notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_download)
                 .setContentTitle("Download")
                 .setContentText("Downloading File")
                 .setAutoCancel(true);
         notificationManager.notify(0, notificationBuilder.build());
-
         initDownload();
 
     }
@@ -54,31 +55,27 @@ public class DownloadService extends IntentService {
     private void initDownload(){
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://tpalwayscreative.esy.es/")
+                .baseUrl("https://s3.amazonaws.com/dl.airdroid.com/")
                 .build();
-
         RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
-
         Call<ResponseBody> request = retrofitInterface.downloadFile();
         try {
-
             downloadFile(request.execute().body());
-
         } catch (IOException e) {
-
             e.printStackTrace();
             Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
-
         }
     }
 
     private void downloadFile(ResponseBody body) throws IOException {
 
+        Log.d(TAG,new Gson().toJson(body));
+
         int count;
         byte data[] = new byte[1024 * 4];
         long fileSize = body.contentLength();
         InputStream bis = new BufferedInputStream(body.byteStream(), 1024 * 8);
-        File outputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "file.zip");
+        File outputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "newFile.exe");
         OutputStream output = new FileOutputStream(outputFile);
         long total = 0;
         long startTime = System.currentTimeMillis();
@@ -103,7 +100,6 @@ public class DownloadService extends IntentService {
                 sendNotification(download);
                 timeCount++;
             }
-
             output.write(data, 0, count);
         }
         onDownloadComplete();
@@ -120,7 +116,6 @@ public class DownloadService extends IntentService {
         notificationBuilder.setContentText(String.format("Downloaded (%d/%d) MB",download.getCurrentFileSize(),download.getTotalFileSize()));
         notificationManager.notify(0, notificationBuilder.build());
     }
-
 
     private void sendIntent(Download download){
 

@@ -24,9 +24,6 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
-
-
 /**
  * Created by PC on 9/1/2017.
  */

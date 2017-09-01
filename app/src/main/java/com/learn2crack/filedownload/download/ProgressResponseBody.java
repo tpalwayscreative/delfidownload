@@ -1,7 +1,6 @@
 package com.learn2crack.filedownload.download;
-
+import android.util.Log;
 import java.io.IOException;
-
 import okhttp3.MediaType;
 import okhttp3.ResponseBody;
 import okio.Buffer;
@@ -19,6 +18,7 @@ public class ProgressResponseBody extends ResponseBody {
     private final ResponseBody responseBody;
     private final OnAttachmentDownloadListener progressListener;
     private BufferedSource bufferedSource;
+    public static final String TAG = ProgressResponseBody.class.getSimpleName();
 
     public ProgressResponseBody(ResponseBody responseBody, OnAttachmentDownloadListener progressListener) {
         this.responseBody = responseBody;

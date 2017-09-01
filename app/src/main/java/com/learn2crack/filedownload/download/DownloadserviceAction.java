@@ -15,7 +15,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DownloadserviceAction {
 
-
     public Retrofit getDownloadRetrofit(OnAttachmentDownloadListener listener) {
         return new Retrofit.Builder()
                 .baseUrl("http://192.168.43.135/retro/")
@@ -45,4 +44,5 @@ public class DownloadserviceAction {
         });
         return httpClientBuilder;
     }
+
 }

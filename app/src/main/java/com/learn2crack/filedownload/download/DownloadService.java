@@ -57,6 +57,8 @@ public class DownloadService implements OnAttachmentDownloadListener{
 
     }
 
+
+
     public void downloadZipFileRx() {
         // https://github.com/yourusername/awesomegames/archive/master.zip
         RetrofitInterface downloadService = createService(RetrofitInterface.class, "https://github.com/");

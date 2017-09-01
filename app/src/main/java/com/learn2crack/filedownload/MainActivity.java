@@ -16,7 +16,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.learn2crack.filedownload.download.*;
-import com.learn2crack.filedownload.download.DownloadService;
 import com.learn2crack.filedownload.models.Download;
 
 import butterknife.BindView;
@@ -54,10 +53,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void startDownload(){
 
-        //Intent intent = new Intent(this,DownloadService.class);
-        //startService(intent);
-        com.learn2crack.filedownload.download.DownloadService service = new DownloadService(this);
-        service.downloadZipFileRx();
+        Intent intent = new Intent(this,DownloadService.class);
+        startService(intent);
+        //com.learn2crack.filedownload.download.DownloadService service = new DownloadService(this);
+        //service.downloadZipFileRx();
 
     }
 

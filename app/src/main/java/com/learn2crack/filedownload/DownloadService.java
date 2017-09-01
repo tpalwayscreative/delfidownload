@@ -69,8 +69,6 @@ public class DownloadService extends IntentService {
 
     private void downloadFile(ResponseBody body) throws IOException {
 
-        Log.d(TAG,new Gson().toJson(body));
-
         int count;
         byte data[] = new byte[1024 * 4];
         long fileSize = body.contentLength();

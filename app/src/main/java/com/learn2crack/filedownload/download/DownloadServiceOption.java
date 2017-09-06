@@ -4,13 +4,9 @@ import android.os.Environment;
 import android.util.Log;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.ResponseBody;
 import okio.BufferedSink;
 import okio.Okio;
@@ -28,12 +24,12 @@ import rx.schedulers.Schedulers;
  * Created by PC on 9/1/2017.
  */
 
-public class DownloadService implements OnAttachmentDownloadListener{
+public class DownloadServiceOption implements OnAttachmentDownloadListener{
 
     private Activity activity;
-    public static final String TAG = DownloadService.class.getSimpleName();
+    public static final String TAG = DownloadServiceOption.class.getSimpleName();
 
-    public DownloadService(Activity activity){
+    public DownloadServiceOption(Activity activity){
         this.activity = activity;
     }
 

@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_download)
     public void downloadFile(){
-
         if(checkPermission()){
             startDownload();
         } else {
@@ -52,10 +51,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startDownload(){
-
         Intent intent = new Intent(this,DownloadService.class);
         startService(intent);
-        //com.learn2crack.filedownload.download.DownloadService service = new DownloadService(this);
+        //DownloadServiceOption service = new DownloadServiceOption(this);
         //service.downloadZipFileRx();
 
     }
@@ -72,19 +70,13 @@ public class MainActivity extends AppCompatActivity {
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-
             if(intent.getAction().equals(MESSAGE_PROGRESS)){
-
                 Download download = intent.getParcelableExtra("download");
                 mProgressBar.setProgress(download.getProgress());
                 if(download.getProgress() == 100){
-
                     mProgressText.setText("File Download Complete");
-
                 } else {
-
                     mProgressText.setText(String.format("Downloaded (%d/%d) MB",download.getCurrentFileSize(),download.getTotalFileSize()));
-
                 }
             }
         }

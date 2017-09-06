@@ -1,5 +1,4 @@
 package com.learn2crack.filedownload;
-
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -9,25 +8,20 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.learn2crack.filedownload.models.Download;
-
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
 import okhttp3.ResponseBody;
-
 import retrofit2.Call;
 import retrofit2.Retrofit;
 
 
 public class DownloadService extends IntentService {
-
 
     public DownloadService() {
         super("Download Service");
